@@ -1,0 +1,539 @@
+DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ahorro de Agua y Huerto Óptimo</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #edf6ef;
+    color: #263b30;
+}
+
+header {
+    background: linear-gradient(120deg, #087e8b, #26834a);
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header p {
+    margin-bottom: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: #174e3a;
+    padding: 15px;
+}
+
+nav button {
+    width: auto;
+    margin: 0;
+    padding: 12px 20px;
+    background: #ffffff;
+    color: #174e3a;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+nav button:hover,
+nav button.activo {
+    background: #b5e6bd;
+}
+
+.contenedor {
+    max-width: 900px;
+    margin: 25px auto;
+    padding: 20px;
+}
+
+.seccion {
+    display: none;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #bbb;
+}
+
+.seccion.activa {
+    display: block;
+}
+
+h2 {
+    text-align: center;
+    color: #187c65;
+}
+
+h3 {
+    color: #187c65;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    padding: 11px;
+    margin-top: 6px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+}
+
+button.btn-accion {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 6px;
+    background: #198754;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button.btn-accion:hover {
+    background: #12663e;
+}
+
+.resultado {
+    margin-top: 20px;
+    padding: 18px;
+    background: #e4f5ed;
+    border-radius: 8px;
+    line-height: 1.7;
+}
+
+.error {
+    color: #c62828;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 9px;
+    text-align: center;
+}
+
+th {
+    background: #187c65;
+    color: white;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #174e3a;
+    color: white;
+    margin-top: 30px;
+}
+
+.huerto {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 4px;
+    margin-top: 20px;
+    padding: 12px;
+    background: #d9eacb;
+    border-radius: 8px;
+}
+
+.celda {
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #8ac47b;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+@media(max-width: 600px) {
+    .contenedor {
+        padding: 10px;
+    }
+
+    .seccion {
+        padding: 15px;
+    }
+
+    table {
+        font-size: 11px;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌱 Agua y Huerto Sostenible</h1>
+    <p>Herramientas para ahorrar agua y diseñar un huerto óptimo</p>
+</header>
+
+<nav>
+    <button class="activo" onclick="mostrarSeccion('inicio', this)">
+        Inicio
+    </button>
+
+    <button onclick="mostrarSeccion('agua', this)">
+        💧 ¿Cuánta agua podemos ahorrar?
+    </button>
+
+    <button onclick="mostrarSeccion('huerto', this)">
+        🌿 Diseño del huerto óptimo
+    </button>
+</nav>
+
+<div class="contenedor">
+
+<!-- INICIO -->
+<section id="inicio" class="seccion activa">
+    <h2>Bienvenido al proyecto sostenible</h2>
+    <p>
+        Este proyecto integra herramientas matemáticas y tecnológicas orientadas al uso eficiente de recursos naturales en entornos urbanos.
+    </p>
+
+    <h3>💧 ¿Cuánta agua podemos ahorrar?</h3>
+    <p>
+        Calcula cuánto tiempo puede durar una reserva doméstica de agua y analiza el impacto directo de aplicar porcentajes de ahorro diario.
+    </p>
+
+    <h3>🌿 Diseño del huerto óptimo</h3>
+    <p>
+        Integra modelos de optimización por derivadas (Cálculo I) para maximizar la superficie de un huerto rectangular bajo un perímetro fijo, complementado con un simulador experimental interactivo.
+    </p>
+
+    <div class="resultado">
+        <b>Objetivo general:</b>
+        Promover el ahorro de recursos hídricos y la optimización espacial mediante rigor matemático y herramientas web interactivas.
+    </div>
+</section>
+
+
+<!-- SECCION AGUA -->
+<section id="agua" class="seccion">
+    <h2>💧 ¿Cuánta agua podemos ahorrar?</h2>
+
+    <p>
+        Calcula la duración de una reserva de agua antes y después de aplicar un porcentaje de ahorro.
+    </p>
+
+    <h3>Variables</h3>
+    <p>
+        V = Volumen almacenado (litros).<br>
+        C = Consumo diario (litros/día).<br>
+        A = Porcentaje de ahorro (%).
+    </p>
+
+    <h3>Modelo matemático</h3>
+    <p>Días sin ahorro = Volumen / Consumo</p>
+    <p>Días con ahorro = Volumen / [Consumo × (1 - Ahorro / 100)]</p>
+
+    <label>Volumen almacenado (litros):</label>
+    <input type="number" id="volumen" placeholder="Ej. 1000">
+
+    <label>Consumo diario (litros):</label>
+    <input type="number" id="consumo" placeholder="Ej. 200">
+
+    <label>Porcentaje de ahorro (%):</label>
+    <input type="number" id="ahorro" placeholder="Ej. 20">
+
+    <button class="btn-accion" onclick="calcularAgua()">
+        Calcular ahorro
+    </button>
+
+    <p id="errorAgua" class="error"></p>
+
+    <div class="resultado" id="resultadoAgua">
+        Los resultados aparecerán aquí.
+    </div>
+
+    <h3>Tabla de cinco pruebas</h3>
+    <div style="overflow-x:auto;">
+    <table>
+        <thead>
+            <tr>
+                <th>Prueba</th>
+                <th>Volumen</th>
+                <th>Consumo</th>
+                <th>Ahorro</th>
+                <th>Antes</th>
+                <th>Después</th>
+            </tr>
+        </thead>
+        <tbody id="tablaAgua"></tbody>
+    </table>
+    </div>
+
+    <h3>Conclusión</h3>
+    <p>
+        Al reducir el consumo diario, la reserva de agua prolonga su autonomía. Los resultados comprueban que el ahorro planificado maximiza la disponibilidad del recurso.
+    </p>
+</section>
+
+
+<!-- SECCION HUERTO -->
+<section id="huerto" class="seccion">
+    <h2>🌿 Diseño del huerto óptimo</h2>
+
+    <p>
+        Modelado analítico y simulación geométrica para maximizar el área de cultivo bajo un perímetro perimetral fijo de <strong>P = 40 m</strong>.
+    </p>
+
+    <h3>Modelo Matemático (Cálculo I y Optimización)</h3>
+    <p>
+        • <strong>Relación de dimensiones:</strong> 2x + 2y = 40 &rArr; x + y = 20 &rArr; <strong>y = 20 - x</strong><br>
+        • <strong>Función de Área:</strong> A(x) = x(20 - x) = <strong>20x - x²</strong><br>
+        • <strong>Optimización (Derivadas):</strong> A'(x) = 20 - 2x = 0 &rArr; <strong>x = 10 m</strong> (máximo absoluto con A''(x) = -2 &lt; 0). Área máxima = <strong>100 m²</strong>.
+    </p>
+
+    <label>Largo (x) en metros (Rango permitido: mayor a 0 y menor a 20):</label>
+    <div style="display: flex; gap: 10px; margin-top: 6px;">
+        <input type="number" id="largoHuerto" min="0.1" max="19.9" step="0.1" placeholder="Ej. 10">
+        <button class="btn-accion" style="margin-top: 0;" onclick="calcularHuertoOptimo()">Simular Escenario</button>
+    </div>
+
+    <p id="errorHuerto" class="error"></p>
+
+    <div id="resultadoHuerto" class="resultado hidden" style="display:none;">
+        <h3>Resultado del Escenario Calculado:</h3>
+        <p>Ancho (y): <span id="res-ancho">0</span> m</p>
+        <p>Perímetro total: <span id="res-perimetro">0</span> m</p>
+        <p>Área obtenida (A): <strong id="res-area">0</strong> m²</p>
+    </div>
+
+    <h3>Tabla Experimental (Heurística y Comprobación)</h3>
+    <div style="overflow-x:auto;">
+    <table>
+        <thead>
+            <tr>
+                <th>Prueba</th>
+                <th>Largo x (m)</th>
+                <th>Ancho y (m)</th>
+                <th>Perímetro (m)</th>
+                <th>Área A (m²)</th>
+            </tr>
+        </thead>
+        <tbody id="tablaHuerto">
+            <!-- Relleno dinámico -->
+        </tbody>
+    </table>
+    </div>
+
+    <h3>Conclusión</h3>
+    <p>
+        Bajo un perímetro rígido preestablecido, la optimización geométrica rectangular de máxima área siempre converge en un cuadrado perfecto de 10 m × 10 m, logrando 100 m² de eficiencia superficial.
+    </p>
+</section>
+
+</div>
+
+<footer>
+    <p>Proyecto educativo | Agua y Huerto Sostenible 🌎</p>
+    <p>Uso responsable de los recursos naturales</p>
+</footer>
+
+
+<script>
+// NAVEGACIÓN ENTRE SECCIONES
+function mostrarSeccion(id, boton) {
+    document.querySelectorAll(".seccion").forEach(seccion => {
+        seccion.classList.remove("activa");
+    });
+    document.getElementById(id).classList.add("activa");
+
+    document.querySelectorAll("nav button").forEach(b => {
+        b.classList.remove("activo");
+    });
+    boton.classList.add("activo");
+}
+
+// ===================================
+// CALCULADORA DE AHORRO DE AGUA
+// ===================================
+function calcularDias(volumen, consumo) {
+    return volumen / consumo;
+}
+
+function calcularAgua() {
+    let volumen = Number(document.getElementById("volumen").value);
+    let consumo = Number(document.getElementById("consumo").value);
+    let ahorro = Number(document.getElementById("ahorro").value);
+
+    let error = document.getElementById("errorAgua");
+    let resultado = document.getElementById("resultadoAgua");
+
+    error.textContent = "";
+
+    if (
+        document.getElementById("volumen").value === "" ||
+        document.getElementById("consumo").value === "" ||
+        document.getElementById("ahorro").value === ""
+    ) {
+        error.textContent = "Completa todos los campos.";
+        return;
+    }
+
+    if (
+        !Number.isFinite(volumen) ||
+        !Number.isFinite(consumo) ||
+        !Number.isFinite(ahorro) ||
+        volumen <= 0 ||
+        consumo <= 0 ||
+        ahorro < 0 ||
+        ahorro >= 100
+    ) {
+        error.textContent = "Ingresa valores válidos. El ahorro debe ser menor al 100%.";
+        return;
+    }
+
+    let diasAntes = calcularDias(volumen, consumo);
+    let consumoNuevo = consumo * (1 - ahorro / 100);
+    let diasDespues = calcularDias(volumen, consumoNuevo);
+    let adicionales = diasDespues - diasAntes;
+
+    resultado.innerHTML = `
+        <h3>Resultados del ahorro de agua</h3>
+        <p>Volumen almacenado: <b>${volumen} litros</b></p>
+        <p>Consumo original: <b>${consumo} litros diarios</b></p>
+        <p>Duración sin ahorro: <b>${diasAntes.toFixed(2)} días</b></p>
+        <p>Consumo reducido: <b>${consumoNuevo.toFixed(2)} litros diarios</b></p>
+        <p>Duración con ahorro: <b>${diasDespues.toFixed(2)} días</b></p>
+        <p>Días adicionales: <b>${adicionales.toFixed(2)} días</b></p>
+    `;
+}
+
+// PRUEBAS DE AGUA
+function generarPruebasAgua() {
+    let pruebas = [
+        [1000, 200, 10],
+        [1000, 200, 20],
+        [1500, 300, 30],
+        [2000, 250, 40],
+        [3000, 500, 50]
+    ];
+
+    let tabla = document.getElementById("tablaAgua");
+
+    pruebas.forEach((p, i) => {
+        let antes = p[0] / p[1];
+        let despues = p[0] / (p[1] * (1 - p[2] / 100));
+
+        tabla.innerHTML += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${p[0]} L</td>
+                <td>${p[1]} L</td>
+                <td>${p[2]}%</td>
+                <td>${antes.toFixed(2)}</td>
+                <td>${despues.toFixed(2)}</td>
+            </tr>
+        `;
+    });
+}
+
+
+// ===================================
+// CALCULADORA DEL HUERTO ÓPTIMO (CÁLCULO I)
+// ===================================
+let contadorPruebasHuerto = 0;
+
+function agregarFilaPruebaHuerto(x, y, perimetro, area) {
+    contadorPruebasHuerto++;
+    let tabla = document.getElementById("tablaHuerto");
+    let tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td>${contadorPruebasHuerto}</td>
+        <td>${x.toFixed(2)}</td>
+        <td>${y.toFixed(2)}</td>
+        <td>${perimetro.toFixed(2)}</td>
+        <td>${area.toFixed(2)}</td>
+    `;
+    tabla.appendChild(tr);
+}
+
+function calcularHuertoOptimo() {
+    let largoInput = document.getElementById("largoHuerto");
+    let error = document.getElementById("errorHuerto");
+    let resultadoDiv = document.getElementById("resultadoHuerto");
+    
+    error.textContent = "";
+
+    if (largoInput.value === "") {
+        error.textContent = "Por favor, ingresa un valor para el largo (x).";
+        resultadoDiv.style.display = "none";
+        return;
+    }
+
+    let x = parseFloat(largoInput.value);
+
+    if (isNaN(x) || x <= 0 || x >= 20) {
+        error.textContent = "Por favor, ingrese un valor mayor a 0 y menor a 20 metros.";
+        resultadoDiv.style.display = "none";
+        return;
+    }
+
+    let y = 20 - x;
+    let perimetro = 2 * x + 2 * y;
+    let area = x * y;
+
+    // Mostrar resultados
+    document.getElementById("res-ancho").textContent = y.toFixed(2);
+    document.getElementById("res-perimetro").textContent = perimetro.toFixed(2);
+    document.getElementById("res-area").textContent = area.toFixed(2);
+    resultadoDiv.style.display = "block";
+
+    // Agregar a la tabla experimental
+    agregarFilaPruebaHuerto(x, y, perimetro, area);
+}
+
+// Inicializar pruebas automáticas iniciales en la tabla del huerto
+function inicializarPruebasHuerto() {
+    let casosIniciales = [4, 7, 10, 13, 16];
+    casosIniciales.forEach(xVal => {
+        let yVal = 20 - xVal;
+        let perimVal = 2 * xVal + 2 * yVal;
+        let areaVal = xVal * yVal;
+        agregarFilaPruebaHuerto(xVal, yVal, perimVal, areaVal);
+    });
+}
+
+// INICIAR DATOS ESTÁTICOS
+generarPruebasAgua();
+inicializarPruebasHuerto();
+</script>
+
+</body>
+</html>
